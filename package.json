@@ -1,6 +1,6 @@
 {
-  "name": "comet-starter",
-  "homepage": "https://metrostar.github.io/comet-starter/",
+  "name": "comet-starter-pyscript",
+  "homepage": "https://metrostar.github.io/comet-starter-pyscript/",
   "private": true,
   "version": "1.0.0",
   "description": "React and TypeScript starter app, pre-configured with the Comet component library and other tools.",
@@ -28,7 +28,7 @@
     "e2e:format": "npx prettier cypress --write",
     "a11y": "unlighthouse --config-file unlighthouse.config.ts",
     "prepare": "husky install",
-    "predeploy": "vite build --base=/comet-starter/",
+    "predeploy": "vite build --base=/comet-starter-pyscript/",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
