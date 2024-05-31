@@ -64,7 +64,6 @@ export const DashboardPieChart = ({
     >
       <div id="chart1"></div>
       <script type="py" dangerouslySetInnerHTML={{ __html: pyscript }}></script>
-      {/* <script type="py" src="./dashboard-pie-chart.py"></script> */}
     </div>
   ) : (
     <></>
