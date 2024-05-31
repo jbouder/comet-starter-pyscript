@@ -1,4 +1,5 @@
 import { Spacecraft } from '@src/types/spacecraft';
+import { getPyScriptUrl } from '@src/utils/helpers';
 import React, { useEffect, useState } from 'react';
 import { ChartData } from '../types';
 
@@ -36,7 +37,7 @@ export const DashboardPieChart = ({
       }}
     >
       <div id="dashboard-pie-chart"></div>
-      <script type="py" src="/py/dashboard-pie-chart.py"></script>
+      <script type="py" src={getPyScriptUrl('dashboard-pie-chart.py')}></script>
     </div>
   ) : (
     <></>
