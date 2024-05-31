@@ -1,4 +1,3 @@
-import { PieChart } from '@metrostar/comet-data-viz';
 import { Spacecraft } from '@src/types/spacecraft';
 import React, { useEffect, useState } from 'react';
 import { ChartData } from '../types';
@@ -29,6 +28,33 @@ export const DashboardPieChart = ({
     }
   }, [items]);
 
+  const pyscript = `
+    import json
+
+    import js
+    import pandas as pd
+    import plotly
+    import plotly.express as px
+
+    ## Get the data
+    from pyodide.http import open_url
+
+    url = "https://raw.githubusercontent.com/alanjones2/uk-historical-weather/main/data/Heathrow.csv"
+    url_content = open_url(url)
+
+    df = pd.read_csv(url_content)
+    df = df[df["Year"] == 2020]
+
+
+    def plot(chart):
+      fig = px.pie(df, values="Month", width=400, height=300, hole=.5)
+      graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+      js.Plotly.newPlot("chart1", js.JSON.parse(graphJSON))
+
+
+    plot("Tmax")
+  `;
+
   return data ? (
     <div
       style={{
@@ -36,14 +62,9 @@ export const DashboardPieChart = ({
         width: '400px',
       }}
     >
-      <PieChart
-        title="Spacecraft Affiliation Pie Chart"
-        innerRadius={60}
-        width={375}
-        height={300}
-        data={data}
-        colors={['#0d7ea2', '#cd425b']}
-      />
+      <div id="chart1"></div>
+      <script type="py" dangerouslySetInnerHTML={{ __html: pyscript }}></script>
+      {/* <script type="py" src="./dashboard-pie-chart.py"></script> */}
     </div>
   ) : (
     <></>
