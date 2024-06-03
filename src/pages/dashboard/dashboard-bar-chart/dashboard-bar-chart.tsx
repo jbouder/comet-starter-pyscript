@@ -1,5 +1,5 @@
-import { BarGraph } from '@metrostar/comet-data-viz';
 import { Spacecraft } from '@src/types/spacecraft';
+import { getPyScriptUrl } from '@src/utils/helpers';
 import React, { useEffect, useState } from 'react';
 import { ChartData } from '../types';
 
@@ -36,16 +36,11 @@ export const DashboardBarChart = ({
         width: '400px',
       }}
     >
-      <BarGraph
-        chart={{
-          height: 300,
-          title: 'Spacecraft Appearance Bar Graph',
-          width: 375,
-        }}
-        alignment="start"
-        data={data}
-        color="#0d7ea2"
-      />
+      <div id="dashboard-complex-plot"></div>
+      <script
+        type="py"
+        src={getPyScriptUrl('dashboard-complex-plot.py')}
+      ></script>
     </div>
   ) : (
     <></>
