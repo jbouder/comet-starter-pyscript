@@ -1,4 +1,3 @@
-import { Spinner } from '@metrostar/comet-extras';
 import { Card, CardBody } from '@metrostar/comet-uswds';
 import { mockData } from '@src/data/spacecraft';
 import { Spacecraft } from '@src/types/spacecraft';
@@ -8,16 +7,11 @@ import ErrorNotification from '../../components/error-notification/error-notific
 import useAuth from '../../hooks/use-auth';
 import { DashboardBarChart } from './dashboard-bar-chart/dashboard-bar-chart';
 import { DashboardPieChart } from './dashboard-pie-chart/dashboard-pie-chart';
-import { DashboardTable } from './dashboard-table/dashboard-table';
 // import axios from '@src/utils/axios';
 
 export const Dashboard = (): React.ReactElement => {
   const { isSignedIn } = useAuth();
-  const {
-    isLoading,
-    error,
-    data: items,
-  } = useQuery<Spacecraft[], { message: string }>({
+  const { error, data: items } = useQuery<Spacecraft[], { message: string }>({
     queryKey: ['dashboard'],
     queryFn: () =>
       // axios
@@ -52,7 +46,7 @@ export const Dashboard = (): React.ReactElement => {
         <div className="tablet:grid-col-6">
           <Card id="pie-chart-card">
             <CardBody>
-              <h2>Spacecraft Affiliation</h2>
+              <h2>Weather Information</h2>
               <DashboardPieChart items={items} />
             </CardBody>
           </Card>
@@ -60,19 +54,10 @@ export const Dashboard = (): React.ReactElement => {
         <div className="tablet:grid-col-6">
           <Card id="pie-bar-card">
             <CardBody>
-              <h2>Spacecraft Appearances</h2>
+              <h2>Complex Plot</h2>
               <DashboardBarChart items={items} />
             </CardBody>
           </Card>
-        </div>
-      </div>
-      <div className="grid-row">
-        <div className="grid-col">
-          {isLoading ? (
-            <Spinner id="spinner" type="small" loadingText="Loading..." />
-          ) : (
-            <DashboardTable items={items} />
-          )}
         </div>
       </div>
     </div>
